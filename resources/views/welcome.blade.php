@@ -376,7 +376,7 @@
         <!-- Code block ends --> 
   </nav>    
     </div>  
-    <div x-data="{ slide: 0, slides: ['https://i.ibb.co/xKbsW9m/Screenshot-2024-01-07-191518.png', 'https://i.ibb.co/S7Vzy6h/Screenshot-2024-01-07-192359.png', 'https://i.ibb.co/tHwFVPp/Screenshot-2024-01-07-192031.png'] }" x-init="setInterval(() => slide = (slide + 1) % slides.length, 3000)" class="relative w-full h-96">
+    <div x-data="{ slide: 0, slides: ['https://i.ibb.co/M7h49hm/Screenshot-2024-01-07-215842.png','https://i.ibb.co/hLZkBQ8/Screenshot-2024-01-07-215252.png', 'https://i.ibb.co/S7Vzy6h/Screenshot-2024-01-07-192359.png', 'https://i.ibb.co/rxjLyCS/Screenshot-2024-01-07-214844.png','https://i.ibb.co/tHwFVPp/Screenshot-2024-01-07-192031.png'] }" x-init="setInterval(() => slide = (slide + 1) % slides.length, 3000)" class="relative w-full h-96">
         <template x-for="(src, index) in slides" :key="index">
             <div :class="{ 'block': index === slide, 'hidden': index !== slide }" class="absolute w-full h-full bg-cover bg-center" :style="'background-image: url(' + src + ')'"></div>
         </template>    
@@ -390,7 +390,7 @@
                     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
     
                         <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
-                    Stores      
+                       Trending Stores      
                 </a>    
     
                 <div class="flex items-center" id="store-nav-content">
@@ -426,7 +426,7 @@
     
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
-                        <img class="hover:grow hover:shadow-lg mb-8 mt-24" src="https://i.ibb.co/XkNyyS6/Screenshot-2024-01-07-202857.png">
+                        <img class="hover:grow hover:shadow-lg mb-12 mt-14" src="https://i.ibb.co/XkNyyS6/Screenshot-2024-01-07-202857.png">
                         <div class="pt-3 flex items-center justify-between">
                             <p class="">Avirate</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -439,7 +439,7 @@
     
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
-                        <img class="hover:grow hover:shadow-lg mb-8 mt-24" src="https://i.ibb.co/jwR982Y/Screenshot-2024-01-07-203001.png">
+                        <img class="hover:grow hover:shadow-lg mb-14 mt-20" src="https://i.ibb.co/jwR982Y/Screenshot-2024-01-07-203001.png">
                         <div class="pt-3 flex items-center justify-between">
                             <p class="">GFLOCK</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -452,9 +452,9 @@
     
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
-                        <img class="hover:grow hover:shadow-lg" width="330px" height="330px" src="https://i.ibb.co/Q9nTrv7/glitz.jpg">
+                        <img class="hover:grow hover:shadow-lg mb-14 mt-24"   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2jfP_ApNrOrJGaDXW8Lv8iUl0zb8I1LfW00NvsK1UsJ3M02NaV2G9t9CXtizmPT28lug&usqp=CAU">
                         <div class="pt-3 flex items-center justify-between">
-                            <p class="">Glitz</p>
+                            <p class="">Mondy</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
                             </svg>    
@@ -504,9 +504,9 @@
     
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="https://images.unsplash.com/photo-1551431009-a802eeec77b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80">
+                        <img class="hover:grow hover:shadow-lg" src="https://i.ibb.co/mqzFgjB/cp.jpg">
                         <div class="pt-3 flex items-center justify-between">
-                            <p class="">Product Name</p>
+                            <p class="">CoolPlanet</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
                             </svg>    
