@@ -18,6 +18,22 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+
+            $table
+                ->foreignId('parent_id')
+                ->nullable()
+                ->constrained('product_categories', 'id')
+                ->nullOnDelete();
+
+            $table->boolean('status')->default(true);
+
+            $table->string('image')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+
+            $table->timestamps();
+                
         });
     }
 
