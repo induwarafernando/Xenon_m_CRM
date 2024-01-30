@@ -49,8 +49,8 @@
 
 
 <x-guest-layout>
-  <div class="bg-no-repeat bg-cover bg-center relative" style="background-image: url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWgefHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80);">
-      <div class="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0"></div>
+  <div class="bg-no-repeat bg-cover bg-top relative" style="background-image: url(https://i.ibb.co/Q70q5f8/wepik-export-20240123073209-YAqa.jpg); height:695px">
+      <div class="absolute bg-gradient-to-b from-blue-500 to-blue-900 opacity-60 inset-0 z-0"></div>
       <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
           <div class="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
               <!-- Left side with branding -->
@@ -91,12 +91,12 @@
                               </div>
                               @if (Route::has('password.request'))
                                   <div class="text-sm">
-                                      <a href="{{ route('password.request') }}" class="text-green-400 hover:text-green-500">Forgot your password?</a>
+                                      <a href="{{ route('password.request') }}" class="text-blue-500 hover:text-blue-800">Forgot your password?</a>
                                   </div>
                               @endif
                           </div>
                           <div>
-                              <x-button class="w-full flex justify-center bg-green-400 hover:bg-green-500 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
+                              <x-button class="w-full flex justify-center bg-blue-400 hover:bg-blue-600 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
                                   Login
                               </x-button>
                           </div>
