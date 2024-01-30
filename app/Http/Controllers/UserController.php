@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\User; // Use 'User' instead of 'Users' if your model is named 'User'
+use App\Enums\Role;
 
 class UserController extends Controller
 {
@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin/user.index', [
-            'users' => User::paginate(10),
+        return view('admin.user.index', [
+            'users' => User::paginate(10)
         ]);
     }
 
@@ -23,7 +23,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.form', [
+            'user' => (new User()),
+            'roles' => Role::cases()
+        ]);
     }
 
     /**
@@ -31,13 +34,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required'
+        ]);
+
+        $validated['password'] = bcrypt('password');
+
+        User::create($validated);
+
+        return redirect()->route('user.index')->with('success', 'User successfully created!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(User $user)
     {
         //
     }
@@ -47,17 +60,26 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin/user.form', [
+        return view('admin.user.form', [
             'user' => $user,
+            'roles' => Role::cases()
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'role' => 'required'
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->route('user.index')->with('success', 'User successfully updated!');
     }
 
     /**
@@ -66,6 +88,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('user.index')->with('success', 'User deleted successfully');
+
+        return redirect()->route('user.index')->with('success', 'User successfully deleted!');
     }
 }
