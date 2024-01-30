@@ -159,7 +159,7 @@
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Token') }}
+                                    {{ __('API Tokens') }}
                                 </x-dropdown-link>
                             @endif
 
