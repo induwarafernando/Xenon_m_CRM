@@ -75,16 +75,21 @@
                 /*Set to match the Tailwind colour you want the active one to be */
                 
             }
+
+            .relative { position: relative; }
         </style>
     
     </head>
     
-    <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
-    
+    <body class="text-gray-600 work-sans leading-normal text-base tracking-normal">
+    <!-- Progress Bar -->
+<div class="relative top-0 left-0 w-full h-2 z-50 bg-black" id="progressBarContainer">
+    <div class="h-full bg-gradient-to-r from-teal-300  via-purple-300  to-blue-400 " id="progressBar"></div>
+</div>
         <!--Nav-->
         
         <header>
-            <div class="overflow-hidden bg-black text-white p-3">
+            <div class="overflow-hidden bg-black text-white p-3.5">
                 <div class="animate-marquee whitespace-nowrap">
                     <span class="mx-4">Islandwide Delivery</span>
                     <span class="mx-4">                   </span>
@@ -189,7 +194,7 @@
                         Shop Now
                         <svg  class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>    
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-xl font-bold text-center text-blue-800 border border-black rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-xl font-bold text-center text-blue-800 bg-white  border border-blue-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         Signup as Merchandise
                     </a>     
                 </div>    
@@ -574,7 +579,28 @@
         </div>
       </div>
     </footer>
-    
+<script>
+ // JavaScript to handle scroll event and update progress bar 
+window.onscroll = function() {
+    var progressBarContainer = document.getElementById("progressBarContainer");
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+
+    // Update progress bar width
+    document.getElementById("progressBar").style.width = scrolled + "%";
+
+    // Change position from relative to fixed after scrolling 100 pixels
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        progressBarContainer.classList.remove('relative');
+        progressBarContainer.classList.add('fixed');
+    } else {
+        progressBarContainer.classList.remove('fixed');
+        progressBarContainer.classList.add('relative');
+    }
+};
+</script>
+
     </body>
     
 </html>
