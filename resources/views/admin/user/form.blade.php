@@ -3,7 +3,7 @@
         <div class="space-y-10 divide-y divide-gray-900/10">
 
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-                <div class="px-4 sm:px-0">
+                <div class="px-8 sm:px-auto">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">
                         Update User
                     </h2>
