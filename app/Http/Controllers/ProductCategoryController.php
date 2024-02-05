@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductCategory;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
+use App\Models\ProductCategory;
 
 class ProductCategoryController extends Controller
 {
@@ -13,7 +13,12 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('product_category.index', [
+            'product_categories' => ProductCategory::orderBy('id', 'DESC')->paginate(10)
+        ]);
+
+        // $productCategories = ProductCategory::paginate(10); // Adjust the number as needed
+        // return view ('product_categories.index', compact('productCategories'));
     }
 
     /**
@@ -21,7 +26,9 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('product_category.form', [
+
+        ]);
     }
 
     /**
@@ -29,7 +36,9 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        //
+        (new ProductCategory())->create($request->all());
+
+        return redirect()->route('product_category.index');
     }
 
     /**
@@ -61,6 +70,9 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        $productCategory->delete();
+
+        return redirect()->route('product_category.index');
+
     }
 }
