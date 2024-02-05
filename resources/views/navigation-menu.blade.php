@@ -111,10 +111,17 @@
 
                               <!-- Account Management -->
                               <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Merchandizers') }}
+                            </div>
+                            
+                            <x-dropdown-link href="{{ route('merchandizers.index') }}">
+                                {{ __('Merchandizers') }}
+                            </x-dropdown-link>
+                              <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Products') }}
                             </div>
 
-                            <x-dropdown-link href="">
+                            <x-dropdown-link href="{{ route('product_category.index') }}">
                                 {{ __('Catergories') }}
                             </x-dropdown-link>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MerchandizerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,12 @@ Route::middleware([
     })->name('dashboard');
 
 
-    Route::resource('product-category', App\Http\Controllers\ProductCategoryController::class);
+    Route::resource('product_category', App\Http\Controllers\ProductCategoryController::class);
+    Route::get('/product_category/create', [ProductCategoryController::class, 'create'])->name('product_category.create');
     Route::resource('user', App\Http\Controllers\UserController::class);
 
 });
+
+// Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('admin/merchandizers', \App\Http\Controllers\Admin\MerchandizerController::class);
+// });
