@@ -14,7 +14,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->unique();
-            $table->string('slug')->unique();
+            // Add slug column with nullable and unique constraints 
+            $table->string('slug')->nullable()->unique();
             $table->text('description')->nullable();
 
             // Parent category relationship

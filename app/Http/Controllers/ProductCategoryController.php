@@ -22,10 +22,11 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    
     public function create()
     {
         return view('product_category.form', [
-
+            'product_category' => new ProductCategory()
         ]);
     }
 
@@ -34,9 +35,16 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        (new ProductCategory())->create($request->all());
+        $validated = $request->validated(
+            [
+                'name' => 'required|string',
+                'description' => 'required|string',
+            ]
+        );
 
-        return redirect()->route('product_category.index');
+    
+        ProductCategory::create($validated);
+        return redirect()->route('product_category.index')->with('success', 'Product Category created successfully');
     }
 
     /**
@@ -62,17 +70,33 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
-    {
-        $validated = $request->validated(
-            [
-                'name' => 'required|string',
-                'description' => 'required|string',
-            ]
-        );
-        $productCategory->update($validated);
-        return redirect()->route('product_category.index');
-    }
+    // public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
+    // {
+    //     $validated = $request->validated(
+    //         [
+    //             'name' => 'required|string',
+    //             'description' => 'required|string',
+    //         ]
+    //     );
+    //     $productCategory->update($validated);
+    //     return redirect()->route('product_category.index')->with('success', 'Product Category updated successfully');
+    // }
+
+/**
+ * Update the specified resource in storage.
+ */
+public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
+{
+    // Validate the request and get the validated data
+    $validatedData = $request->validated();
+
+    // Now you can safely update the product category with the validated data
+    $productCategory->update($validatedData);
+
+    return redirect()->route('product_category.index')->with('success', 'Product Category updated successfully');
+}
+
+
 
 
     /**
@@ -82,7 +106,7 @@ class ProductCategoryController extends Controller
     {
         $productCategory->delete();
 
-        return redirect()->route('product_category.index');
+        return redirect()->route('product_category.index')->with('success', 'Product Category deleted successfully');
         
         
 

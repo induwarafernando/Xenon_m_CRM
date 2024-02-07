@@ -60,9 +60,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="px-4 py-4 sm:px-6">
+                    <div class="px-4 py-4 sm:px-6 flex justify-between">
+                        <a href="{{ route('product_category.index') }}"
+                            class="inline-flex justify-center w-1/3 rounded-md border border-gray-300 bg-white px-4 py-2 text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+                            Cancel
+                        </a>
                         <button type="submit"
-                            class="inline-flex justify-center w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            class="inline-flex justify-center w-1/3 rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
                             Save
                         </button>
                     </div>
