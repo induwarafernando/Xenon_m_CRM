@@ -17,8 +17,6 @@ class ProductCategoryController extends Controller
             'product_categories' => ProductCategory::orderBy('id', 'DESC')->paginate(10)
         ]);
 
-        // $productCategories = ProductCategory::paginate(10); // Adjust the number as needed
-        // return view ('product_categories.index', compact('productCategories'));
     }
 
     /**
@@ -46,7 +44,9 @@ class ProductCategoryController extends Controller
      */
     public function show(ProductCategory $productCategory)
     {
-        //
+        return view('product_category.show', [
+            'product_category' => $productCategory
+        ]);
     }
 
     /**
@@ -54,7 +54,9 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        return view('product_category.form', [
+            'product_category' => $productCategory
+        ]);
     }
 
     /**
@@ -62,8 +64,16 @@ class ProductCategoryController extends Controller
      */
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
-        //
+        $validated = $request->validated(
+            [
+                'name' => 'required|string',
+                'description' => 'required|string',
+            ]
+        );
+        $productCategory->update($validated);
+        return redirect()->route('product_category.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -73,6 +83,8 @@ class ProductCategoryController extends Controller
         $productCategory->delete();
 
         return redirect()->route('product_category.index');
+        
+        
 
     }
 }
