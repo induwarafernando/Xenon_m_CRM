@@ -35,18 +35,11 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        $validated = $request->validated(
-            [
-                'name' => 'required|string',
-                'description' => 'required|string',
-            ]
-        );
-
-    
-        ProductCategory::create($validated);
+        $validatedData = $request->validated();
+        ProductCategory::create($validatedData);
         return redirect()->route('product_category.index')->with('success', 'Product Category created successfully');
     }
-
+    
     /**
      * Display the specified resource.
      */
