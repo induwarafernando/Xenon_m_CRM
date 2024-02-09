@@ -52,10 +52,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.user.show', [
+      //display user details profile
+      return view('admin.user.show', [
             'user' => $user
         ]);
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
