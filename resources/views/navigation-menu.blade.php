@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 z-10" style="box-shadow:  0  4px  2px -2px gray">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -6,20 +6,41 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <span class="self-center text-3xl font-extrabold whitespace-nowrap text-blue-800 dark:text-white">X E N O N</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                        {{ __('Profile') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('product_category.index') }}" :active="request()->routeIs('product_category.index')">
+                        {{ __('Product Category') }}
+                    </x-nav-link>
+                </div>
             </div>
+            <div class="hidden  space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link href="">
+                  <span class="text-black">{{ Auth::user()->role->name }}</span>  
+                </x-nav-link>
+            
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <!-- Teams Dropdown -->
+                {{-- <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
                         <x-dropdown align="right" width="60">
@@ -69,7 +90,8 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                @endif
+                @endif --}}
+
 
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
@@ -81,7 +103,6 @@
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
-                                    Administration
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
