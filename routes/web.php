@@ -23,6 +23,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    // 'super.admin'
 ])->group(function () {
 
 
@@ -39,4 +40,8 @@ Route::middleware([
 
 // Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/merchandizers', \App\Http\Controllers\Admin\MerchandizerController::class);
+// });
+
+// Route::middleware('super.admin')->group(function () {
+//     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 // });
