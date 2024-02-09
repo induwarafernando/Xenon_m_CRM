@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         return view('product_category.index', [
-            'product_categories' => ProductCategory::orderBy('id', 'DESC')->paginate(10)
+            'product_categories' => ProductCategory::orderBy('id', 'ASC')->paginate(10)
         ]);
 
     }
@@ -88,10 +88,6 @@ public function update(UpdateProductCategoryRequest $request, ProductCategory $p
 
     return redirect()->route('product_category.index')->with('success', 'Product Category updated successfully');
 }
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */
