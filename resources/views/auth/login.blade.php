@@ -71,8 +71,16 @@
                   @endif
                   <form method="POST" action="{{ route('login') }}">
                       @csrf
+                      <div class="flex justify-left items-left">
+                        <div class="relative">
+                          <div class="ml-2 mt-5 w-8 h-8 bg-gradient-to-br from-blue-400  to-green-500 rounded-full animate-pulse absolute top-1/12 left-1/12 transform -translate-x-1/2 -translate-y-1/2 opacity-15" ></div>
+                          <div class="ml-2 mt-5 w-6 h-6 bg-gradient-to-br from-blue-400  to-green-500 rounded-full animate-pulse absolute top-1/64 left-1/64 transform -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+                          <div class="ml-2 mt-5 w-4 h-4 bg-gradient-to-br from-blue-400  to-green-500 rounded-full animate-pulse absolute top-1/128 left-1/128 transform -translate-x-1/2 -translate-y-1/2 opacity-40"></div>
+                          <div class="ml-2 mt-5 w-3 h-3 bg-gradient-to-br from-blue-400  to-green-500 rounded-full animate-pulse absolute top-1/256 left-1/256 transform -translate-x-1/2 -translate-y-1/2"></div>
+                        </div> 
+                    </div>    
                       <div class="mb-4">
-                          <h3 class="font-semibold text-2xl text-gray-800">Login</h3>
+                          <h3 class="font-semibold text-3xl pt-1 text-gray-800">&nbsp;&nbsp;&nbsp;&nbsp;Login</h3>
                           <p class="text-gray-500">Please login to your account.</p>
                       </div>
                       <div class="space-y-5">

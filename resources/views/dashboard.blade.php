@@ -153,7 +153,7 @@
                                     src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=334&amp;q=80"
                                     alt="avatar">
                                 <p class="mx-2 text-sm">
-                                    <span class="font-bold" href="#">Jane Doe</span> Like Your reply on <span
+                                    <span class="font-bold" href="#">Induwara Fernando</span> Like Your reply on <span
                                         class="font-bold text-indigo-400" href="#">Test with TDD</span> artical . 1h
                                 </p>
                             </a>
