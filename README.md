@@ -35,7 +35,7 @@ Xenon is an e-commerce platform tailored specifically for fashion stores, design
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/yourusername/xenon-fashion-platform.git`
+1. Clone the repository: `git clone https://github.com/induwarafernando/Xenon_m_CRM`
 2. Install dependencies: `composer install && npm install`
 3. Configure environment variables: Copy `.env.example` to `.env` and update with your configuration.
 4. Run migrations: `php artisan migrate`
