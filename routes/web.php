@@ -38,6 +38,9 @@ Route::middleware([
 
 });
 
+Route::get('/product-detail', [ProductDetailController::class, 'show']);
+
+
 // Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/merchandizers', \App\Http\Controllers\Admin\MerchandizerController::class);
 // });
