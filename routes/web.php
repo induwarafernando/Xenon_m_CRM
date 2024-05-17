@@ -39,6 +39,7 @@ Route::middleware([
 
 });
 
+Route::get('/product-detail', [ProductDetailController::class, 'show'])->name('product-detail');
 
 
 
