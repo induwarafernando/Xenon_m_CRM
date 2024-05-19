@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MerchandizerController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,15 +33,20 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-
+    Route::get('/product/{id}', [ProductDetailController::class, 'show'])->name('product.detail');
     Route::resource('product_category', App\Http\Controllers\ProductCategoryController::class);
     Route::get('/product_category/create', [ProductCategoryController::class, 'create'])->name('product_category.create');
     Route::resource('user', App\Http\Controllers\UserController::class);
 
 });
 
-Route::get('/product-detail', [ProductDetailController::class, 'show'])->name('product-detail');
 
+Route::get('/product-detail/{id}', [ProductDetailController::class, 'show'])->name('product-detail');
+Route::post('/add-to-cart/{id}', [ProductDetailController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [ProductDetailController::class, 'cartIndex'])->name('cart.index');
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Route::middleware(['auth', 'admin'])->group(function () {

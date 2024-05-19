@@ -20,7 +20,7 @@
                 <button type="submit">Add to Cart</button>
             </form>
         </div>
-        <div class="cart">
+        {{-- <div class="cart">
             <h2>Cart</h2>
             <ul>
                 @foreach ($cartItems as $item)
@@ -30,7 +30,7 @@
             <p>Total: ${{ $cartTotal }}</p>
             <a href="{{ route('cart.checkout') }}">Checkout</a>
         </div>
-    </div>
+    </div> --}}
     <!-- Include your JavaScript scripts here -->
 </body>
 
