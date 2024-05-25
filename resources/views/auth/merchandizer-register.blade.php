@@ -27,13 +27,23 @@
                                 </div> 
                             </div>    
                             <h3 class="font-bold text-2xl sm:text-3xl text-gray-800 pl-8 pt-1">Register</h3>
-                            <p class="text-gray-500 text-sm sm:text-base">Create your account to get started.</p>
+                            <p class="text-gray-500 text-sm sm:text-base">Create your Merchandizer account to get started.</p>
                         </div>
                         <div class="space-y-4 sm:space-y-5">
-                            <div class="space-y-1 sm:space-y-2">
-                                <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Name</label>
-                                <x-input id="name" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Your Name" />
-                            </div>
+                           <!-- Add these fields inside your registration form -->
+
+                           <div class="space-y-1 sm:space-y-2">
+                            <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Shop Name</label>
+                            <input type="text" name="name" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                        </div>
+                        <div class="space-y-1 sm:space-y-2">
+                            <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Location</label>
+                            <input type="text" name="location" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                        </div>
+                        <div class="space-y-1 sm:space-y-2">
+                            <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Logo</label>
+                            <input type="file" name="logo" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400">
+                        </div>
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Email</label>
                                 <x-input id="email" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="mail@gmail.com" />

@@ -8,14 +8,17 @@ use Illuminate\Support\Facades\Schema;
 class CreateMerchandizersTable extends Migration
 {
     public function up()
-    {
-        Schema::create('merchandizers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('merchandizers', function (Blueprint $table) {
+        $table->id();
+        $table->string('name'); // Shop Name
+        $table->string('email')->unique(); // Email Address
+        $table->string('password'); // Password
+        $table->string('location'); // Location
+        $table->string('logo')->nullable(); // Logo URL
+        $table->timestamps();
+    });
+}
 
     public function down()
     {

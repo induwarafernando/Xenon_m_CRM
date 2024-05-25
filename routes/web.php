@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\MerchandizerController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +58,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::middleware('super.admin')->group(function () {
 //     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 // });
+
+
+Route::get('/merchandizer-register', [RegisterController::class, 'showRegistrationForm'])->name('merchandizer-register');
+Route::post('/merchandizer-register', [RegisterController::class, 'create'])->name('merchandizer-registration');
