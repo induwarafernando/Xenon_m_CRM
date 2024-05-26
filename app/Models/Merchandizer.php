@@ -17,6 +17,9 @@ class Merchandizer extends Authenticatable
         'password',
         'location',
         'logo',
+        'role',
+        
+
     ];
 
     protected $hidden = [

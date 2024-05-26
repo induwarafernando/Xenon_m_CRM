@@ -22,6 +22,9 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+
+              // Foreign key to merchandizers table
+              $table->foreignId('merchandizer_id')->nullable()->constrained('merchandizers')->onDelete('cascade');
         });
     }
 

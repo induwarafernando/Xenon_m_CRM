@@ -29,7 +29,7 @@
                             <h3 class="font-bold text-2xl sm:text-3xl text-gray-800 pl-8 pt-1">Register</h3>
                             <p class="text-gray-500 text-sm sm:text-base">Create your account to get started.</p>
                         </div>
-                        <div class="space-y-4 sm:space-y-5">
+                        <div class="space-y-4 sm:space-y-1">
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Name</label>
                                 <x-input id="name" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Your Name" />
@@ -42,6 +42,14 @@
                                 <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Password</label>
                                 <x-input id="password" class="w-full content-center text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" required autocomplete="new-password" placeholder="Enter your password" />
                             </div>
+                            <div class="space-y-1 sm:space-y-2">
+                                <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Role</label>
+                                <select name="role" id="role" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400">
+                                    <option value="2">Customer</option>
+                                    <option value="3">Merchandizer</option>
+                                    <option value="4">Delivery Driver</option>
+                                </select> 
+                        
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="mb-4 text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Confirm Password</label>
                                 <x-input id="password_confirmation" class="w-full content-center text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password" />

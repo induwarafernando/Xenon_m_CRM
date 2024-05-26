@@ -14,8 +14,12 @@ class CreateMerchandizersTable extends Migration
         $table->string('name'); // Shop Name
         $table->string('email')->unique(); // Email Address
         $table->string('password'); // Password
-        $table->string('location'); // Location
+        $table->string('location')->nullable(); // Location
         $table->string('logo')->nullable(); // Logo URL
+        $table->rememberToken();
+        $table->timestamp('email_verified_at')->nullable();
+        // role 3 for merchandizer
+        $table->TinyInteger('role')->default(3);
         $table->timestamps();
     });
 }

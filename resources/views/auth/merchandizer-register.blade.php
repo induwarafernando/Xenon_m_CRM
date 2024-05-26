@@ -1,18 +1,18 @@
 <x-guest-layout>
-    <div class="bg-no-repeat bg-cover bg-top relative" style="background-image: url(https://i.ibb.co/Q70q5f8/wepik-export-20240123073209-YAqa.jpg); height:695px">
+    <div class="bg-no-repeat bg-cover bg-top relative" style="background-image: url(https://i.ibb.co/Q70q5f8/wepik-export-20240123073209-YAqa.jpg); height:100vh">
         <div class="absolute bg-gradient-to-b from-blue-500 to-blue-900 opacity-60 inset-0 z-0"></div>
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
             <div class="flex justify-center self-center z-10">
                  <!-- Left side with branding -->
-                   <div class="self-start hidden lg:flex flex-col text-white mr-32">
+                   <div class="self-start hidden lg:flex flex-col text-white mr-8">
                       <img src="" class="mb-3">
-                      <h1 class="mb-3 mt-48 sm:mt-64 font-bold text-4xl sm:text-5xl">Hi! Welcome Back</h1>
-                      <p class="pr-3 text-sm sm:text-base">"Your Closet's Best Friend – XENON, Your Ultimate Delivery Partner."</p>
+                      <h1 class="mb-3 mt-32 font-bold text-3xl sm:text-4xl">Hi! Welcome Back</h1>
+                      <p class="pr-3 text-xs sm:text-sm">"Your Closet's Best Friend – XENON, Your Ultimate Delivery Partner."</p>
                    </div>
                    
                    <!-- Authentication Card -->
                    <div class="flex justify-center self-center z-10">
-                        <div class="p-8 sm:p-12 bg-white mx-auto rounded-2xl w-full sm:w-100">
+                        <div class="p-6 sm:p-8 bg-white mx-auto rounded-2xl w-full sm:w-100">
                           <x-validation-errors class="mb-4" />
                           
                     <form method="POST" action="{{ route('register') }}">
@@ -26,35 +26,37 @@
                                   <div class="ml-2 mt-5 w-3 h-3 bg-gradient-to-br from-blue-400  to-green-500 rounded-full animate-pulse absolute top-1/256 left-1/256 transform -translate-x-1/2 -translate-y-1/2"></div>
                                 </div> 
                             </div>    
-                            <h3 class="font-bold text-2xl sm:text-3xl text-gray-800 pl-8 pt-1">Register</h3>
-                            <p class="text-gray-500 text-sm sm:text-base">Create your Merchandizer account to get started.</p>
+                            <h3 class="font-bold text-lg sm:text-xl text-gray-800 pl-8 mt-3">Register</h3>
+                            <p class="text-gray-500 text-xs sm:text-sm">Create your Merchandizer account to get started.</p>
                         </div>
-                        <div class="space-y-4 sm:space-y-5">
+                        <div class="space-y-2 sm:space-y-1">
                            <!-- Add these fields inside your registration form -->
 
                            <div class="space-y-1 sm:space-y-2">
                             <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Shop Name</label>
-                            <input type="text" name="name" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                            <input type="text" name="name" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
                         </div>
                         <div class="space-y-1 sm:space-y-2">
                             <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Location</label>
-                            <input type="text" name="location" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                            <input type="text" name="location" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
                         </div>
                         <div class="space-y-1 sm:space-y-2">
                             <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Logo</label>
-                            <input type="file" name="logo" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400">
+                            <input type="file" name="logo" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400">
                         </div>
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Email</label>
-                                <x-input id="email" class="w-full text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="mail@gmail.com" />
+                                <x-input id="email" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="mail@gmail.com" />
                             </div>
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Password</label>
-                                <x-input id="password" class="w-full content-center text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" required autocomplete="new-password" placeholder="Enter your password" />
+                                <x-input id="password" class="w-full content-center text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" required autocomplete="new-password" placeholder="Enter your password" />
                             </div>
+                            <!-- Set the user role as merchandizer -->
+                            <input type="hidden" name="role" value="3">
                             <div class="space-y-1 sm:space-y-2">
                                 <label class="mb-4 text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Confirm Password</label>
-                                <x-input id="password_confirmation" class="w-full content-center text-xs sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password" />
+                                <x-input id="password_confirmation" class="w-full content-center text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password" />
                             </div>
                                                    
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -64,8 +66,8 @@
                                             <x-checkbox name="terms" id="terms" required />
                                             <div class="ms-2">
                                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-xs sm:text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
+                                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-xs sm:text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
                                                 ]) !!}
                                             </div>
                                         </div>
@@ -73,7 +75,7 @@
                                 </div>
                             @endif
                             <div>
-                                <x-button class="w-full flex justify-center bg-blue-500 hover:bg-blue-700 text-gray-100 p-2.5 sm:p-3 rounded-full tracking-wide font-bold shadow-lg cursor-pointer transition ease-in duration-500">
+                                <x-button class="w-full flex justify-center bg-blue-500 hover:bg-blue-700 text-gray-100 p-2 sm:p-2.5 rounded-full tracking-wide font-bold shadow-lg cursor-pointer transition ease-in duration-500">
                                     Register
                                 </x-button>
                             </div>

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\Merchandizer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller{
     public function create(){
@@ -36,6 +37,17 @@ class RegisterController extends Controller{
     public function showRegistrationForm()
     {
         return view('auth.merchandizer-register');
+    }
+
+    protected function redirectToBasedOnRole($user)
+    {
+        if ($user->role == 1 || $user->role == 3 || $user->role == 4) {
+            return redirect()->route('dashboard');
+        } elseif ($user->role == 2) {
+            return redirect()->route('home');
+        }
+
+        return redirect('/');
     }
     
 }
