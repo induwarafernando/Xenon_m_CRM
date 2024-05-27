@@ -1,4 +1,121 @@
 <x-guest-layout>
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script>
+        let map;
+        let marker;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('openModalBtn').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent form submission
+                document.getElementById('mapModal').style.display = "block";
+                initMap();
+            });
+
+            document.getElementsByClassName('close')[0].addEventListener('click', function() {
+                document.getElementById('mapModal').style.display = "none";
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == document.getElementById('mapModal')) {
+                    document.getElementById('mapModal').style.display = "none";
+                }
+            });
+        });
+
+        function initMap() {
+            // Check if geolocation is supported
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Get the current location
+                    const currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Initialize the map centered at the current location
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: currentLocation,
+                        zoom: 13
+                    });
+
+                    // Initialize the marker at the current location
+                    marker = new google.maps.Marker({
+                        position: currentLocation,
+                        map: map,
+                        draggable: true
+                    });
+
+                    // Add an event listener to update the input field when the marker is moved
+                    marker.addListener('dragend', function() {
+                        const position = marker.getPosition();
+                        document.getElementById('location-input').value = `${position.lat()}, ${position.lng()}`;
+                    });
+
+                    // Update the input field with the current marker position
+                    document.getElementById('location-input').value = `${currentLocation.lat}, ${currentLocation.lng}`;
+                }, function() {
+                    // Handle location error
+                    handleLocationError(true, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, pos) {
+            // Handle location error
+            const errorMsg = browserHasGeolocation ? 
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.';
+            alert(errorMsg);
+        }
+    </script>
+    <style>
+        /* Add some basic styling */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        
+        /* Modal styling */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+        
     <div class="bg-no-repeat bg-cover bg-top relative" style="background-image: url(https://i.ibb.co/Q70q5f8/wepik-export-20240123073209-YAqa.jpg); height:100vh">
         <div class="absolute bg-gradient-to-b from-blue-500 to-blue-900 opacity-60 inset-0 z-0"></div>
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
@@ -38,8 +155,18 @@
                         </div>
                         <div class="space-y-1 sm:space-y-2">
                             <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Location</label>
-                            <input type="text" name="location" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                            <input id="location-input" type="text" name="location" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400" required>
+                            <button id="openModalBtn" class="px-4 py-2 bg-blue-500 text-white rounded">Select Location</button>
                         </div>
+                    
+                        <!-- The Modal -->
+                        <div id="mapModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                       
                         <div class="space-y-1 sm:space-y-2">
                             <label class="text-xs sm:text-sm font-medium text-gray-700 tracking-wide">Logo</label>
                             <input type="file" name="logo" class="w-full text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400">
@@ -91,4 +218,7 @@
             </div>
         </div>
     </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9eUmqR95ebfKdaI8ROL0PY8BmfI4Iy6Y
+    &callback=initMap"></script>
+
 </x-guest-layout>

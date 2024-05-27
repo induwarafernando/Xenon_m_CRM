@@ -34,24 +34,21 @@ Route::post('/merchandizer-register', [RegisterController::class, 'create'])->na
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
 // Authenticated Routes
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::get('/home', [HomeController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/redirect', function () {
+    return redirect()->route('role.redirect');
+})->name('login.redirect');
 
-    // Apply role.redirect middleware to dashboard route only
-    Route::middleware(['role.redirect'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    });
+// Dashboard Route
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Product Category Routes
-    Route::resource('product_category', ProductCategoryController::class);
-    Route::get('/product_category/create', [ProductCategoryController::class, 'create'])->name('product_category.create');
+// Product Category Routes
+Route::resource('product_category', ProductCategoryController::class);
+Route::get('/product_category/create', [ProductCategoryController::class, 'create'])->name('product_category.create');
 
-    // User Routes
-    Route::resource('user', App\Http\Controllers\UserController::class);
+// User Routes
+Route::resource('user', App\Http\Controllers\UserController::class);
 
-    // Admin Routes
-    Route::resource('admin/merchandizers', MerchandizerController::class);
-});
+// Admin Routes
+Route::resource('admin/merchandizers', MerchandizerController::class);
