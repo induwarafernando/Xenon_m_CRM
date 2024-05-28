@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
+
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product-detail/{id}', [ProductDetailController::class, 'show'])->name('product.detail');
 Route::post('/add-to-cart/{id}', [ProductDetailController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [ProductDetailController::class, 'cartIndex'])->name('cart.index');
@@ -52,3 +55,4 @@ Route::resource('user', App\Http\Controllers\UserController::class);
 
 // Admin Routes
 Route::resource('admin/merchandizers', MerchandizerController::class);
+

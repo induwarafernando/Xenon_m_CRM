@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Enums\Role;
+use App\Models\ProductCategory;
 
 class HomeController extends Controller
 {
     public function index()
+
     {
+
+
         // Check if the user is authenticated
         $user = auth()->user();
         
@@ -28,6 +32,13 @@ class HomeController extends Controller
         // Redirect to home for unauthenticated users
         return view('home', [
             'product' => Product::find(1) // Example: find a product with ID 1
+        ]);
+    }
+    
+    public function shop()
+    {
+        return view('shop', [
+            'products' => Product::all()
         ]);
     }
 }
