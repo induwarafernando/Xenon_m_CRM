@@ -15,7 +15,7 @@ class MerchandizerController extends Controller
     public function index()
     {
         $merchandizers = Merchandizer::all();
-        return view('admin.merchandizers.index', compact('merchandizers'));
+        return view('merchandizers', compact('merchandizers'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class MerchandizerController extends Controller
 
         Merchandizer::create($request->all());
 
-        return redirect()->route('admin.merchandizers.index')
+        return redirect()->route('admin.merchandizers')
             ->with('success', 'Merchandizer created successfully');
     }
 

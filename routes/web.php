@@ -9,6 +9,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +59,19 @@ Route::resource('user', App\Http\Controllers\UserController::class);
 // Admin Routes
 Route::resource('admin/merchandizers', MerchandizerController::class);
 
+// Cart Routes
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+
+
+Route::middleware(['auth', 'merchandizer'])->group(function () {
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
+});
+
+//product create blade
+Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');

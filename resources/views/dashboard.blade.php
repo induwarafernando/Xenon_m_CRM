@@ -54,7 +54,7 @@
                             <h2 class="text-xl font-bold">Total Customers</h2>
                             <p>Customers</p>
                         </div>
-                        <span class="text-4xl font-bold">{{ $totalCustomers }}</span>
+                        {{-- <span class="text-4xl font-bold">{{ $totalCustomers }}</span> --}}
                     </div>
                 </div>
                 <!-- Merchandizers Card -->
@@ -64,7 +64,7 @@
                             <h2 class="text-xl font-bold">Total Merchandizers</h2>
                             <p>Merchandizers</p>
                         </div>
-                        <span class="text-4xl font-bold">{{ $totalMerchandizers }}</span>
+                        {{-- <span class="text-4xl font-bold">{{ $totalMerchandizers }}</span> --}}
                     </div>
                 </div>
                 <!-- Products Card -->
@@ -74,7 +74,7 @@
                             <h2 class="text-xl font-bold">Total Products</h2>
                             <p>Products</p>
                         </div>
-                        <span class="text-4xl font-bold">{{ $totalProducts }}</span>
+                        {{-- <span class="text-4xl font-bold">{{ $totalProducts }}</span> --}}
                     </div>
                 </div>
                 <!-- Orders Card -->
@@ -84,7 +84,7 @@
                             <h2 class="text-xl font-bold">Total Orders</h2>
                             <p>Orders</p>
                         </div>
-                        <span class="text-4xl font-bold">{{ $totalProducts }}</span>
+                        {{-- <span class="text-4xl font-bold">{{ $totalProducts }}</span> --}}
                     </div>
                 </div>
             </div>
@@ -120,7 +120,6 @@
                         labels: ['Customers', 'Merchandizers', 'Products', 'Orders'],
                         datasets: [{
                             label: 'Data',
-                            data: [{{ $totalCustomers }}, {{ $totalMerchandizers }}, {{ $totalProducts }}, {{ $totalProducts }}],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.6)',
                                 'rgba(255, 99, 132, 0.6)',

@@ -15,6 +15,7 @@ class ProductFactory extends Factory
         return [
             'category_id' => 1, // Assuming you have at least one category
             'name' => $this->faker->word,
+            'price' => $this->faker->randomFloat(2, 1, 100), // '2' is the number of decimals, '1' is the minimum value, '100' is the maximum value
             'slug' => $this->faker->slug,
             'description' => $this->faker->paragraph,
             'meta_title' => $this->faker->sentence,

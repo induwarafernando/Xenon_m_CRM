@@ -28,26 +28,37 @@
                         @csrf
                         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-700">Quantity</label>
                         <input type="number" name="quantity" id="quantity" min="1" value="1" class="w-20 p-2 border border-gray-300 rounded mb-4">
+                        <p class="text-red-600 text-2xl font-semibold mt-4">Total Price: LKR <span id="total-price">{{ number_format($product->price, 2) }}</span></p>
                         <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">Add to Cart</button>
+                    </form>
+                    <form action="{{ route('cart.index') }}" method="GET" class="mt-4">
+                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">View Cart</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Include your JavaScript scripts here -->
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityInput = document.getElementById('quantity');
+            const totalPriceElement = document.getElementById('total-price');
+            const unitPrice = {{ $product->price }};
+    
+            quantityInput.addEventListener('input', function () {
+                const quantity = parseInt(quantityInput.value);
+                const totalPrice = (quantity * unitPrice).toFixed(2);
+                totalPriceElement.textContent = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice);
+            });
+        });
+    
         document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+            // Remove event.preventDefault() to actually submit the form
             const quantity = document.getElementById('quantity').value;
-            
-            // Displaying a simple alert. You can replace this with any action like an AJAX call.
             alert('Adding ' + quantity + ' items to the cart.');
-
-            // Uncomment the next line to actually submit the form after handling it via JS if needed
-            // this.submit();
         });
     </script>
+    
 </body>
 
 </html>

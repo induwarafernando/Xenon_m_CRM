@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class ProductCategorySeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ProductCategorySeeder extends Seeder
     {
         // Define an array of product categories with sample data
         $categories = [
-            ['name' => "Men's Office Wear", 'slug' => 'mens-office-wear', 'description' => 'Elevate Your Office Look'],
+            ['name' => "Men's Office Wear", 'description' => 'Elevate Your Office Look'],
             ['name' => "Women's Office Wear", 'slug' => 'womens-office-wear', 'description' => 'Sophisticated Work Attire'],
             ['name' => 'Denims', 'slug' => 'denims', 'description' => 'Classic Denim Styles'],
             ['name' => 'Crop Tops', 'slug' => 'crop-tops', 'description' => 'Trendy and Versatile'],
@@ -47,7 +48,21 @@ class ProductCategorySeeder extends Seeder
 
         // Insert each category into the database
         foreach ($categories as $category) {
-            ProductCategory::create($category);
+            // Generate a unique slug
+            $slug = Str::slug($category['name']);
+            $existingSlug = \DB::table('product_categories')->where('slug', $slug)->exists();
+            
+            if ($existingSlug) {
+                $slug = $slug . '-' . Str::random(5);
+            }
+            
+            \DB::table('product_categories')->insert([
+                'name' => $category['name'],
+                'slug' => $slug,
+                'description' => $category['description'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }
