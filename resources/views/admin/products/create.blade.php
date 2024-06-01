@@ -16,9 +16,10 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <form method="POST" action="{{ route('products.store') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                @csrf
 
+
+                <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                         Product Name
@@ -69,16 +70,18 @@
                         id="price" type="number" name="price" step="0.01" placeholder="Price" required>
                 </div>
 
-                {{-- Image URL --}}
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="image_url">
-                        Image URL
-                    </label>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="image_url" type="url" name="image_url" placeholder="Image URL" required>
-                </div>
 
+
+
+    <!-- Image Upload Field -->
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+            Image
+        </label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="image" type="file" name="image" required>
+    </div>
                 {{-- Stocks Quantity --}}
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="stocks">
@@ -89,15 +92,16 @@
                         id="stocks" type="number" name="stocks" placeholder="Stocks Quantity" required>
                 </div>
 
-                {{-- Submit button --}}
-                <div class="flex items-center justify-between">
-                    <button
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit">
-                        Add Product
-                    </button>
-                </div>
-            </form>
+               
+                <!-- Submit button -->
+    <div class="flex items-center justify-between">
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">
+            Add Product
+        </button>
+    </div>
+</form>
         </div>
     </div>
 </div>

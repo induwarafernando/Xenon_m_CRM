@@ -75,3 +75,4 @@ Route::middleware(['auth', 'merchandizer'])->group(function () {
 //product create blade
 Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('admin/products', [ProductController::class, 'index'])->name('products.index');

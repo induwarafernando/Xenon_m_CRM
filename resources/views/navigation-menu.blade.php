@@ -39,7 +39,7 @@
 
                 <!-- Visible only to Merchandizers -->
                 @auth
-                    @if(Auth::user()->role->name == 'Merchandizer')
+                    @if(Auth::user()->role == 3)
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-nav-link href="{{ route('products.create') }}" :active="request()->routeIs('products.create')">
                                 {{ __('Products') }}

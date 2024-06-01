@@ -231,7 +231,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($products as $product)
             <div class="bg-white rounded shadow-lg overflow-hidden">
-                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
                 <div class="p-4">
                     <a href="{{ route('product.detail', ['id' => $product->id]) }}">
                         <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
