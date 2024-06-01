@@ -1,23 +1,18 @@
 <?php
-
 // app/Http/Controllers/ProductController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function create()
     {
-        //fetch all categories from the database
         $categories = ProductCategory::all();
-
-        return view('admin.products.create',['categories' => $categories]);
+        return view('admin.products.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -28,26 +23,41 @@ class ProductController extends Controller
             'category_id' => 'required|exists:product_categories,id',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image_url' => 'required|url',
+            'stocks' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'meta_title' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
-            ]);
+        ]);
 
-        Product::create([
+        if ($request->hasFile('image')) {
+            // Store the image in the 'products' directory inside the 'public' disk
+            $imagePath = $request->file('image')->store('products', 'public');
+        } else {
+            $imagePath = null;
+        }
+
+        $product = new Product([
             'name' => $request->name,
             'slug' => $request->slug,
             'category_id' => $request->category_id,
             'description' => $request->description,
             'price' => $request->price,
-            'image_url' => $request->image_url, 
+            'stocks' => $request->stocks,
+            'image' => $imagePath,
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
-            
-               
         ]);
 
-        return redirect()->route('products.create')->with('success', 'Product added successfully!');
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+    }
+
+    public function index()
+    {
+        $products = Product::all();
+        return view('admin.products.index', compact('products'));
     }
 }
