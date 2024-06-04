@@ -31,4 +31,21 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-];
+
+        // Other service configurations...
+    
+        'paypal' => [
+            'client_id' => env('PAYPAL_CLIENT_ID'),
+            'secret' => env('PAYPAL_SECRET'),
+            'settings' => [
+                'mode' => env('PAYPAL_MODE', 'sandbox'), // Can be 'sandbox' or 'live'
+                'http.ConnectionTimeOut' => 1000,
+                'log.LogEnabled' => true,
+                'log.FileName' => storage_path('logs/paypal.log'),
+                'log.LogLevel' => 'FINE', // Available options: 'FINE', 'INFO', 'WARN', 'ERROR'
+            ],
+        ],
+    
+    ];
+    
+

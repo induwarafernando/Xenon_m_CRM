@@ -36,6 +36,11 @@
                         {{ __('Add Products') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('products.list') }}" :active="request()->routeIs('products.list')">
+                        {{ __('Products') }}
+                    </x-nav-link>
+
 
                 <!-- Visible only to Merchandizers -->
                 @auth
@@ -47,6 +52,7 @@
                         </div>                    
                     @endif
                 @endauth
+                </div>
             </div>
 
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

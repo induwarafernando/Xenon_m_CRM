@@ -14,7 +14,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Product Image -->
             <div>
-                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
             </div>
             <!-- Product Details -->
             <div class="flex flex-col justify-between">

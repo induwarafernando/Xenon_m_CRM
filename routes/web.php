@@ -12,6 +12,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PayPalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,4 +77,22 @@ Route::middleware(['auth', 'merchandizer'])->group(function () {
 //product create blade
 Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
+//products list blade
+Route::get('admin/products/list', [ProductController::class, 'list'])->name('products.list');
 Route::get('admin/products', [ProductController::class, 'index'])->name('products.index');
+//destroy product
+Route::delete('admin/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+//edit product
+Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+//update product
+Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+//checkout
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+
+
+Route::post('/paypal/payment', [PayPalController::class, 'createPayment'])->name('paypal.create');
+Route::get('/paypal/payment/execute', [PayPalController::class, 'executePayment'])->name('paypal.execute');
+Route::get('/paypal/payment/cancel', [PayPalController::class, 'cancelPayment'])->name('paypal.cancel');

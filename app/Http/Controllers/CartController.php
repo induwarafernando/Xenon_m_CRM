@@ -56,4 +56,11 @@ class CartController extends Controller
         Cart::remove($id);
         return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
     }
+    public function clear()
+    {
+        // Clear the cart
+        Cart::clear();
+
+        return redirect()->route('cart.index')->with('success', 'Cart cleared successfully');
+    }
 }
