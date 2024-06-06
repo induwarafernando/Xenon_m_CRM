@@ -21,39 +21,38 @@
                         {{ __('Profile') }}
                     </x-nav-link>
                 </div>
+
+        
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
+                    
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('product_category.index') }}" :active="request()->routeIs('product_category.index')">
                         {{ __('Product Category') }}
                     </x-nav-link>
                 </div>
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('products.create') }}" :active="request()->routeIs('products.create')">
                         {{ __('Add Products') }}
                     </x-nav-link>
                 </div>
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('products.list') }}" :active="request()->routeIs('products.list')">
                         {{ __('Products') }}
                     </x-nav-link>
-
-
-                <!-- Visible only to Merchandizers -->
-                @auth
-                    @if(Auth::user()->role == 3)
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link href="{{ route('products.create') }}" :active="request()->routeIs('products.create')">
-                                {{ __('Products') }}
-                            </x-nav-link>
-                        </div>                    
-                    @endif
-                @endauth
                 </div>
-            </div>
+
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('admin.orders.list') }}" :active="request()->routeIs('admin.orders.list')">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+                    </div> --}}
+            
 
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link href="">

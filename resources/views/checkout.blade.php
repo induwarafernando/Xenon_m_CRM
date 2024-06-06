@@ -64,40 +64,39 @@
             margin-top: 10px;
         }
         /* Add this CSS to your stylesheet */
-.shipping-method {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .shipping-method {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.shipping-method input[type="radio"]:checked + .form-check-label {
-    background-color: #e7f3ff;
-    border-color: #b3d8ff;
-    color: #007bff;
-}
+        .shipping-method input[type="radio"]:checked + .form-check-label {
+            background-color: #e7f3ff;
+            border-color: #b3d8ff;
+            color: #007bff;
+        }
 
-.shipping-method input[type="radio"]:checked + .form-check-label + .shipping-cost {
-    background-color: #e7f3ff;
-    border-color: #b3d8ff;
-    color: #007bff;
-}
+        .shipping-method input[type="radio"]:checked + .form-check-label + .shipping-cost {
+            background-color: #e7f3ff;
+            border-color: #b3d8ff;
+            color: #007bff;
+        }
 
-.shipping-method .form-check-label, 
-.shipping-method .shipping-cost {
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
+        .shipping-method .form-check-label, 
+        .shipping-method .shipping-cost {
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-/* Ensure the input radio is hidden */
-.shipping-method input[type="radio"] {
-    display: none;
-}
-
+        /* Ensure the input radio is hidden */
+        .shipping-method input[type="radio"] {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -106,7 +105,7 @@
             <!-- Left Section: Scrollable Form -->
             <div class="col-md-6 scrollable">
                 <h2>Checkout</h2>
-                <form method="POST" action="{{ route('checkout.store') }}">
+                <form id="checkout-form" method="POST" action="{{ route('checkout.store') }}">
                     @csrf
 
                     <!-- Contact -->
@@ -146,28 +145,18 @@
                         <input type="text" id="phone" name="phone" class="form-control" required>
                     </div>
 
-                   <!-- Shipping method -->
-                <h3>Shipping method</h3>
-                <div class="form-check shipping-method">
-                  <input class="form-check-input" type="radio" id="free_shipping" name="shipping_method" value="Free Shipping" checked>
-                 <label class="form-check-label" for="free_shipping">Free Shipping</label>
-                <span class="shipping-cost">Free</span>
-                </div>
-                
-                {{-- // Add more shipping methods here fast delivery duplicate the above code and change the values --}}
-                <div class="form-check
-                shipping-method">
-                <input class="form-check-input" type="radio" id="fast_delivery" name="shipping_method" value="Fast Delivery">
-                <label class="form-check-label" for="fast_delivery">Fast Delivery</label>
-                <span class="shipping-cost">Rs 500.00</span>
-
-    
-
-
-                    
-
-
-                </div>
+                    <!-- Shipping method -->
+                    <h3>Shipping method</h3>
+                    <div class="form-check shipping-method">
+                        <input class="form-check-input" type="radio" id="free_shipping" name="shipping_method" value="Free Shipping" checked>
+                        <label class="form-check-label" for="free_shipping">Free Shipping</label>
+                        <span class="shipping-cost" data-cost="0">Free</span>
+                    </div>
+                    <div class="form-check shipping-method">
+                        <input class="form-check-input" type="radio" id="fast_delivery" name="shipping_method" value="Fast Delivery">
+                        <label class="form-check-label" for="fast_delivery">Fast Delivery</label>
+                        <span class="shipping-cost" data-cost="500">Rs 500.00</span>
+                    </div>
 
                     <!-- Payment -->
                     <h3>Payment</h3>
@@ -213,54 +202,182 @@
                             <label class="form-check-label" for="different_billing">Use a different billing address</label>
                         </div>
                     </div>
-                      <!-- PayPal Button Container -->
-                <div id="paypal-button-container"></div>
+                    
+                    <!-- PayPal Button Container -->
+                    <div id="paypal-button-container"></div>
 
-                <!-- Initialize PayPal Button -->
-                <script src="https://www.paypal.com/sdk/js?client-id=ARzPrfNGDZjLXch6FHKZ5woRmWJvpZMrE51bgbPwK_ZeWeCmne8xgXks48YybkT_2K7H1DmoXrmnwRJP"></script>
-                <script>
-                    paypal.Buttons({
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{
-                                    amount: {
-                                        value: '7000', // Update this with the actual total amount
-                                    },
-                                }],
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(details) {
-                                alert('Transaction completed by ' + details.payer.name.given_name);
-                                // Handle the result of the payment here
-                            });
-                        }
-                    }).render('#paypal-button-container');
-                </script>
+                    <!-- Initialize PayPal Button -->
+                    <script src="https://www.paypal.com/sdk/js?client-id=ARzPrfNGDZjLXch6FHKZ5woRmWJvpZMrE51bgbPwK_ZeWeCmne8xgXks48YybkT_2K7H1DmoXrmnwRJP"></script>
+                    <script>
+                        paypal.Buttons({
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: calculateGrandTotal(), // Update this with the actual total amount
+                                        },
+                                    }],
+                                });
+                            },
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    alert('Transaction completed by ' + details.payer.name.given_name);
+                                    // Handle the result of the payment here
+                                });
+                            }
+                        }).render('#paypal-button-container');
+                    </script>
+                </form>
             </div>
 
             <!-- Right Section: Static Product Summary -->
             <div class="col-md-6 summary">
                 <div class="order-summary">
                     <h3>Order summary</h3>
-                    <div class="d-flex justify-content-between">
-                        <p>Aqua Blue Washed Oxford Long Sleeve Shirt</p>
-                        <p>Rs 7,000.00</p>
+                    <div id="cart-items">
+                        <!-- Cart items will be displayed here -->
+
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-2">Product</th>
+                                    <th class="py-2">Price</th>
+                                    <th class="py-2">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($cartItems as $item)
+                                    <tr>
+                                        <td class="border px-4 py-2">
+                                            <img src="{{ Storage::disk('public')->url($item->attributes->image) }}" alt="{{ $item->name }}" class="w-20 h-20 object-cover">
+                                            <div>{{ $item->name }}</div>
+                                        </td>
+                                        <td class="border px-4 py-2">{{ number_format($item->price, 2) }}</td>
+                                        <td class="border px-4 py-2">{{ $item->quantity }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <p class="text-muted">Shipping: Free</p>
                     <hr>
                     <div class="d-flex justify-content-between">
                         <strong>Total</strong>
-                        <p class="text-xl">Subtotal: {{ number_format(Cart::getTotal(), 2) }}</p>
+                        <p class="text-xl">Subtotal: <span id="subtotal">{{ number_format(Cart::getTotal(), 2) }}</span></p>
                     </div>
+                    <p class="text-muted">Shipping: <span id="shipping-cost">Free</span></p>
+                    <div class="d-flex justify-content-between">
+                        <strong>Grand Total</strong>
+                        <p class="text-xl">Rs <span id="grand-total">{{ number_format(Cart::getTotal(), 2) }}</span></p>
+                    </div>
+                    <form action="{{ route('order.place') }}" method="POST">
+                        @csrf
+                        <!-- Include other necessary fields here -->
+                        <input type="text" name="first_name" placeholder="First Name" required>
+                        <input type="text" name="last_name" placeholder="Last Name" required>
+                        <input type="text" name="address" placeholder="Address" required>
+                        <input type="text" name="city" placeholder="City" required>
+                        <input type="text" name="postal_code" placeholder="Postal Code" required>
+                        <input type="text" name="phone" placeholder="Phone" required>
+                        
+                        <button type="submit" id="cod-button" class="btn btn-secondary">Cash on Delivery</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to dynamically update shipping cost and grand total
+        function updateShippingAndTotal() {
+            const shippingCostElement = document.querySelector('input[name="shipping_method"]:checked').nextElementSibling.nextElementSibling;
+            const shippingCost = parseFloat(shippingCostElement.dataset.cost);
+            document.getElementById('shipping-cost').textContent = shippingCost === 0 ? 'Free' : 'Rs ' + shippingCost.toFixed(2);
+
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace(/,/g, ''));
+            const grandTotal = subtotal + shippingCost;
+            document.getElementById('grand-total').textContent = grandTotal.toFixed(2);
+        }
+
+        // Add event listeners for shipping method change
+        document.querySelectorAll('input[name="shipping_method"]').forEach(radio => {
+            radio.addEventListener('change', updateShippingAndTotal);
+        });
+
+        // Initial call to set correct values on page load
+        updateShippingAndTotal();
+
+        // Fetch and display cart items
+        $(document).ready(function() {
+            // Assuming you have a route that returns the cart items in JSON format
+            $.get('{{ route("cart.index") }}', function(data) {
+                let cartItemsHtml = '';
+                data.items.forEach(item => {
+                    cartItemsHtml += `
+                        <div class="d-flex justify-content-between">
+                            <p>${item.name} x ${item.quantity}</p>
+                            <p>Rs ${item.price}</p>
+                        </div>
+                    `;
+                });
+                $('#cart-items').html(cartItemsHtml);
+                $('#subtotal').text(data.total.toFixed(2));
+                updateShippingAndTotal();
+            });
+        });
+
+        // Function to calculate the grand total for PayPal
+        function calculateGrandTotal() {
+            const shippingCost = parseFloat(document.querySelector('input[name="shipping_method"]:checked').nextElementSibling.nextElementSibling.dataset.cost);
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace(/,/g, ''));
+            return (subtotal + shippingCost).toFixed(2);
+        }
+
+        document.getElementById('cod-button').addEventListener('click', function() {
+            // Set the payment method to COD
+            document.getElementById('cod').checked = true;
+
+            // Gather form data
+            const formData = {
+                email: document.getElementById('email').value,
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                address: document.getElementById('address').value,
+                apartment: document.getElementById('apartment').value,
+                city: document.getElementById('city').value,
+                postal_code: document.getElementById('postal_code').value,
+                phone: document.getElementById('phone').value,
+                shipping_method: document.querySelector('input[name="shipping_method"]:checked').value,
+                payment_method: document.querySelector('input[name="payment_method"]:checked').value,
+                billing_address: document.querySelector('input[name="billing_address"]:checked').value,
+                total_amount: calculateGrandTotal()
+            };
+
+            // Send the form data to the server
+            fetch('{{ route('checkout.store') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Order placed successfully!');
+                    // Optionally, redirect to a confirmation page
+                    window.location.href = '{{ route('checkout.index') }}';
+                } else {
+                    alert('There was an error placing your order. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

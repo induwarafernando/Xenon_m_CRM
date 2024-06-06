@@ -14,7 +14,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PayPalController;
-
+use Darryldecode\Cart\Facades\CartFacade as Cart;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,7 +68,7 @@ Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.a
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
 Route::middleware(['auth', 'merchandizer'])->group(function () {
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -90,9 +91,38 @@ Route::put('products/{product}', [ProductController::class, 'update'])->name('pr
 //checkout
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
 
 
 
 Route::post('/paypal/payment', [PayPalController::class, 'createPayment'])->name('paypal.create');
 Route::get('/paypal/payment/execute', [PayPalController::class, 'executePayment'])->name('paypal.execute');
 Route::get('/paypal/payment/cancel', [PayPalController::class, 'cancelPayment'])->name('paypal.cancel');
+
+Route::get('/cart/items', function() {
+    $cartItems = Cart::getContent();
+    $total = Cart::getTotal(); // Adjust according to your needs (use total, subtotal, etc.)
+    
+    $items = $cartItems->map(function ($item) {
+        return [
+            'name' => $item->name,
+            'quantity' => $item->quantity,
+            'price' => $item->price
+        ];
+    });
+
+    return response()->json(['items' => $items, 'total' => $total]);
+})->name('cart.items');
+
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+
+
+Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.details');
+Route::get('/orders/{id}/track', [OrderController::class, 'track'])->name('order.track');
+
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+Route::post('/admin/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+//orders.list
+Route::get('/admin/orders/list', [OrderController::class, 'list'])->name('admin.orders.list');

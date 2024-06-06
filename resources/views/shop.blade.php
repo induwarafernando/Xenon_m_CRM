@@ -75,7 +75,7 @@
         .relative { position: relative; }
 
         .parallax-bg {
-            background-image: url('https://i.ibb.co/hLZkBQ8/Screenshot-2024-01-07-215252.png'); /* Make sure the path to the image is correct */
+            background-image: url('https://vogal-demo.myshopify.com/cdn/shop/files/demo2-banne1_2000x.jpg?v=1679745534'); /* Make sure the path to the image is correct */
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
@@ -189,7 +189,7 @@
                                 <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Track Order</a>
                             </li>    
                             <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Order History</a>
+                                <a href="{{route('order.index')}}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Orders</a>
                             </li>    
                             <li>
                                 <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
@@ -197,123 +197,239 @@
                         </ul>    
                     </div>    
                 </div>    
-            </header>    
+            </header>  
 
     <!-- Hero Section -->
-    <section class="bg-gray-800 text-white py-20">
-        <div class="container mx-auto text-center">
-            <h1 class="text-5xl font-bold">Summer Collection</h1>
-            <p class="mt-4 text-xl">Discover our exclusive summer collection on sale!</p>
-        </div>
-    </section>
-    <div class="relative h-screen parallax-bg">
-        <div class="absolute inset-0 flex items-center justify-center text-center text-white">
-            <div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Limited Time Offer</h1>
-                <h2 class="text-2xl md:text-4xl font-semibold mb-4">Special Edition</h2>
-                <p class="text-lg md:text-xl mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                <p class="text-lg md:text-xl font-bold mb-4">Buy This T-shirt At 20% Discount, Use Code OFF20</p>
-                <a href="#" class="inline-block bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">SHOP NOW</a>
-            </div>
-        </div>
-    </div>
+            <div class="relative h-[84vh] parallax-bg" 
+            x-data="{ current: 1, timeout: null, imageData: [
+                 {
+                    text1: '', 
+                    text2:'', 
+                    text3: '', 
+                    text4: '', 
+                    buttonColor: '', 
+                    textColor: 'text-black'
+                },
+                { 
+                    text1: '', 
+                    text2: '', 
+                    text3: '', 
+                    text4: '', 
+                    buttonColor: 'bg-blue-500', 
+                    textColor: 'text-black'
+                },
+                { 
+                    text1: 'New Arrivals', 
+                    text2: 'Limited Stock', 
+                    text3: 'Discover the latest collection', 
+                    text4: 'Shop Now', 
+                    buttonColor: 'bg-blue-700', 
+                    textColor: 'text-black'
+                },
+               
+                {
+                    text1: ' ', 
+                    text2: ' ', 
+                    text3: ' ', 
+                    text4: '                                   ', 
+                    buttonColor: 'bg-green-700', 
+                    textColor: 'text-black'
+                    
+                }
+            ] }"
+            x-init="() => {
+                timeout = setInterval(() => {
+                    current = current === 4 ? 1 : current + 1;
+                }, 2200);
+            }"
+            @mouseenter="clearInterval(timeout)"
+            @mouseleave="timeout = setInterval(() => {
+                current = current === 4 ? 1 : current + 1;
+            }, 3000)"
+            @keydown.arrow-left.window="current = current === 1 ? 4 : current - 1"
+            @keydown.arrow-right.window="current = current === 4 ? 1 : current + 1">
+           <template x-for="(image, index) in imageData" :key="index">
+               <div x-show="current === index + 1" class="absolute inset-0 w-full h-full transition-opacity duration-500" :class="{ 'opacity-0': current !== index + 1, 'opacity-100': current === index + 1 }">
+                   <img :src="index === 0 ? 'https://gflock.lk/cdn/shop/files/Evening-cover-LK-FInal2_2048x2048.jpg?v=1716754262' : index === 1 ? 'https://gflock.lk/cdn/shop/files/Cover_2048x2048.jpg?v=1671178372' : index === 2 ? 'https://vogal-demo.myshopify.com/cdn/shop/files/demo2-banne1_2000x.jpg?v=1679745534' : 'https://gflock.lk/cdn/shop/files/Cotton-cover-LK-Final2_2048x2048.jpg?v=1715271859'" class="object-cover w-full h-full" alt="">
+                   <div class="absolute inset-0 flex items-center justify-center text-center" :class="image.textColor">
+                       <div>
+                           <h1 class="text-4xl md:text-6xl font-bold mb-4" :class="image.textColor" x-text="image.text1"></h1>
+                           <h2 class="text-2xl md:text-4xl font-semibold mb-4" :class="image.textColor" x-text="image.text2"></h2>
+                           <p class="text-lg md:text-xl mb-4" :class="image.textColor" x-text="image.text3"></p>
+                           <p class="text-lg md:text-xl font-bold mb-4" :class="image.textColor" x-text="image.text4"></p>
+                           {{-- <a href="#" class="inline-block px-6 py-2 rounded-md hover:bg-blue-200 transition" :class="image.buttonColor">SHOP NOW</a> --}}
+                       </div>
+                   </div>
+               </div>
+           </template>
+           <button @click="current = current === 1 ? 4 : current - 1" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition">
+               &#10094;
+           </button>
+           <button @click="current = current === 4 ? 1 : current + 1" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition">
+               &#10095;
+           </button>
+       </div>
 
-    <!-- Search Bar -->
-    <div class="container mx-auto mt-10">
-        <div class="flex justify-center">
-            <input type="text" placeholder="Search for products..." class="w-full max-w-xl p-4 rounded border border-gray-300 shadow-md">
-        </div>
-    </div>
+       
+       
+              <div class="bg-red-500 text-white text-center py-16">
+               <h1 class="text-4xl font-bold mb-6">Sale up to 50% off</h1>
+               <div class="flex flex-wrap justify-center gap-4">
+                   <a href="#NewArrivals" class="tag bg-red-300 hover:bg-red-400 text-white px-4 py-2 rounded">New Arrivals</a>
+                   <a href="#Women's Office Wear" class="tag bg-red-300 hover:bg-red-400 text-white px-4 py-2 rounded">Women's Office Wear</a>
+                   <a href="#Frocks" class="tag bg-red-300 hover:bg-red-400 text-white px-4 py-2 rounded">Frocks</a>
+                   <a href="#Tops and Crop Tops" class="tag bg-red-300 hover:bg-red-400 text-white px-4 py-2 rounded">Tops and Crop Tops</a>
+                     <a href="#Jeans" class="tag bg-red-300 hover:bg-red-400 text-white px-4 py-2 rounded">Jeans</a>
+                    
 
-    <!-- Product Listing -->
-    <div class="container mx-auto mt-10">
-        <h2 class="text-3xl font-bold text-center mb-8">On Sale T-Shirts</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            @foreach($products as $product)
-            <div class="bg-white rounded shadow-lg overflow-hidden">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <a href="{{ route('product.detail', ['id' => $product->id]) }}">
-                        <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
-                    </a>
-                    <p class="text-gray-500">${{ $product->price }}</p>
+
                  
-                    <div class="mt-2">
-                        <span class="text-gray-700 text-sm">{{ $product->category->name }}</span>
-                    </div>
-                </div>
+               </div>
+           </div>
+       <!-- Search Bar -->
+       <div class="container mx-auto mt-10">
+           <div class="flex justify-center">
+               <input type="text" placeholder="Search for products..." class="w-full max-w-xl p-4 rounded border border-gray-300 shadow-md">
             </div>
-        @endforeach
-
-
-            <!-- Product Item 2 -->
-            <div class="bg-white rounded shadow-lg overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="T-Shirt Name 4" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold">T-Shirt Name 4</h3>
-                    <p class="text-gray-500">$17.00 - $19.00</p>
-                    <div class="mt-2">
-                        <span class="text-gray-700 text-sm">Men</span>
-                    </div>
-                    <div class="flex mt-2">
-                        <span class="bg-gray-200 text-gray-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">-14%</span>
-                    </div>
-                    <div class="mt-4 flex space-x-2">
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Item 3 -->
-            <div class="bg-white rounded shadow-lg overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="T-Shirt Name 6" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold">T-Shirt Name 6</h3>
-                    <p class="text-gray-500">$18.00 - $22.00</p>
-                    <div class="mt-2">
-                        <span class="text-gray-700 text-sm">Men</span>
-                    </div>
-                    <div class="flex mt-2">
-                        <span class="bg-gray-200 text-gray-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">-20%</span>
-                    </div>
-                    <div class="mt-4 flex space-x-2">
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Item 4 -->
-            <div class="bg-white rounded shadow-lg overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="T-Shirt Name 7" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold">T-Shirt Name 7</h3>
-                    <p class="text-gray-500">$36.00 - $39.00</p>
-                    <div class="mt-2">
-                        <span class="text-gray-700 text-sm">Women</span>
-                    </div>
-                    <div class="flex mt-2">
-                        <span class="bg-gray-200 text-gray-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">-10%</span>
-                    </div>
-                    <div class="mt-4 flex space-x-2">
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
-                        <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
+        
+<!-- Product Listing -->
+<div class="container px-20 mx-auto mt-10">
+    <h2 id="NewArrivals" class="text-3xl font-bold text-center mb-8">New Arrivals</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        @foreach($products->sortByDesc('created_at')->take(5) as $product)
+        <div class="bg-white rounded shadow-lg overflow-hidden">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-86 object-cover">
+            <div class="p-4">
+                <a href="{{ route('product.detail', ['id' => $product->id]) }}">
+                    <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                </a>
+                <p class="text-gray-500">LKR: {{ $product->price }}</p>
+
+                <div class="mt-2">
+                    <span class="text-gray-700 text-sm">{{ $product->category->name }}</span>
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
+                    <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
+                    <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
+                    <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
+                    <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
+</div>
+
+<!-- Product Listing -->
+<div class="container p-20 mx-auto mt-10">
+    <h2 id="Women's Office Wear" class="text-3xl font-bold text-center mb-8">Women's Office Wear</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        @foreach($products as $product)
+            @if($product->category->name == "Women's Office Wear")
+                <div class="bg-white rounded shadow-lg overflow-hidden">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-86 object-cover">
+                    <div class="p-4">
+                        <a href="{{ route('product.detail', ['id' => $product->id]) }}">
+                            <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                        </a>
+                        <p class="text-gray-500">LKR: {{ $product->price }}</p>
+                        <div class="mt-2">
+                            <span class="text-gray-700 text-sm">{{ $product->category->name }}</span>
+                        </div>
+                        <div class="mt-4 flex space-x-2">
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+</div>
+
+<!-- Product Listing -->
+<div class="container px-20 mx-auto mt-10">
+    <h2 id="Frocks" class="text-4xl font-bold text-center mb-8">Frocks</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        @foreach($products as $product)
+            @if($product->category->name == "Frocks")
+                <div class="bg-white rounded shadow-lg overflow-hidden">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-86 object-cover">
+                    <div class="p-4">
+                        <a href="{{ route('product.detail', ['id' => $product->id]) }}">
+                            <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                        </a>
+                        <p class="text-gray-500">LKR: {{ $product->price }}</p>
+                        <div class="mt-2">
+                            <span class="text-gray-700 text-sm">{{ $product->category->name }}</span>
+                        </div>
+                        <div class="mt-4 flex space-x-2">
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+</div>
+
+<!-- Product Listing -->
+<div class="container px-20 mx-auto mt-10">
+    <h2 id="Tops and Crop Tops" class="text-4xl font-bold text-center mb-8">Tops and Crop Tops</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        @foreach($products as $product)
+            @if($product->category->name == "Tops" || $product->category->name == "Crop Tops")
+                <div class="bg-white rounded shadow-lg overflow-hidden">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-86 object-cover">
+                    <div class="p-4">
+                        <a href="{{ route('product.detail', ['id' => $product->id]) }}">
+                            <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                        </a>
+                        <p class="text-gray-500">LKR: {{ $product->price }}</p>
+                        <div class="mt-2">
+                            <span class="text-gray-700 text-sm">{{ $product->category->name }}</span>
+                        </div>
+                        <div class="mt-4 flex space-x-2">
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XS</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">S</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">M</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">L</button>
+                            <button class="bg-gray-300 rounded px-2 py-1 text-sm">XL</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll('.tag');
+
+        links.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

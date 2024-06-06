@@ -8,37 +8,34 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function add(Request $request, $productId)
+    public function add(Request $request, $id)
     {
-        $product = Product::find($productId);
+        $product = Product::find($id);
+
         if (!$product) {
             return redirect()->back()->with('error', 'Product not found.');
         }
 
-        Cart::add([
+        Cart::add(array(
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => $request->quantity,
-            'attributes' => [
+            'attributes' => array(
+                'image' => $product->image,
                 'description' => $product->description,
-                'image_url' => $product->image_url,
-            ],
-        ]);
+            )
+        ));
 
-        \Log::info('Cart content after adding:', [
-            'cart' => Cart::getContent(),
-        ]);
-
-        return redirect()->route('cart.index')->with('success', 'Product added to cart!');
+        return redirect()->route('cart.index')->with('success', 'Product added to cart.');
     }
 
     public function index()
     {
         $cartItems = Cart::getContent();
+
         return view('cart', compact('cartItems'));
     }
-
     public function update(Request $request, $id)
     {
         Cart::update($id, array(

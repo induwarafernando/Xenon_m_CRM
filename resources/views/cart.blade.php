@@ -166,7 +166,7 @@
                 <p class="text-xl">Shipping: Free</p>
             </div>
             {{-- //checkout button --}}
-            <a href="{{ route('checkout.show') }}" class="button">Checkout</a>
+            <a href="{{ route('checkout.index') }}" class="button">Checkout</a>
 
 
         </div>
