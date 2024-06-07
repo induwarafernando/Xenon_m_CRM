@@ -21,14 +21,18 @@
                         {{ __('Profile') }}
                     </x-nav-link>
                 </div>
-
-        
+                
+                @can('is-superadmin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
-                    
+                @endcan
+
+
+                
+                @can('is-superadmin-or-merchandiser')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('product_category.index') }}" :active="request()->routeIs('product_category.index')">
                         {{ __('Product Category') }}
@@ -46,13 +50,16 @@
                         {{ __('Products') }}
                     </x-nav-link>
                 </div>
+                
+                @endcan
 
-                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"> 
                         <x-nav-link href="{{ route('admin.orders.list') }}" :active="request()->routeIs('admin.orders.list')">
                             {{ __('Orders') }}
                         </x-nav-link>
-                    </div> --}}
-            
+                    </div> 
+            </div>
+        
 
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link href="">

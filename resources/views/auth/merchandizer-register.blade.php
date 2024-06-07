@@ -121,7 +121,7 @@
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
             <div class="flex justify-center self-center z-10">
                  <!-- Left side with branding -->
-                   <div class="self-start hidden lg:flex flex-col text-white mr-8">
+                   <div class="self-start hidden mt-48 lg:flex flex-col text-white mr-8">
                       <img src="" class="mb-3">
                       <h1 class="mb-3 mt-32 font-bold text-3xl sm:text-4xl">Hi! Welcome Back</h1>
                       <p class="pr-3 text-xs sm:text-sm">"Your Closet's Best Friend – XENON, Your Ultimate Delivery Partner."</p>

@@ -99,6 +99,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -166,10 +167,9 @@
                             <label class="form-check-label" for="payhere">
                                 Bank Card / Bank Account - PayHere
                                 <div>
-                                    <img src="https://example.com/visa.png" alt="Visa">
-                                    <img src="https://example.com/mastercard.png" alt="MasterCard">
-                                    <img src="https://example.com/amex.png" alt="Amex">
-                                    <img src="https://example.com/discover.png" alt="Discover">
+                                    <img src="https://img.icons8.com/?size=50&id=87495&format=png&color=000000" alt="Visa">
+                                    <img src="https://img.icons8.com/?size=50&id=13610&format=png&color=000000" alt="MasterCard">
+                                    <img src="https://img.icons8.com/?size=50&id=So6jK8i6jddZ&format=png&color=000000" alt="Amex">
                                 </div>
                             </label>
                         </div>
@@ -178,11 +178,11 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="koko" name="payment_method" value="Koko: Buy Now Pay Later">
-                            <label class="form-check-label" for="koko">Koko: Buy Now Pay Later <img src="https://example.com/visa.png" alt="Visa"></label>
+                            <label class="form-check-label" for="koko">Koko: Buy Now Pay Later <img src="https://img.icons8.com/?size=50&id=13608&format=png&color=000000" alt="Visa"></label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="mintpay" name="payment_method" value="Mintpay | Shop now. Pay later.">
-                            <label class="form-check-label" for="mintpay">Mintpay | Shop now. Pay later. <img src="https://example.com/visa.png" alt="Visa"></label>
+                            <label class="form-check-label" for="mintpay">Mintpay | Shop now. Pay later. <img  src="https://img.icons8.com/?size=50&id=13608&format=png&color=000000" alt="Visa"></label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="cod" name="payment_method" value="Cash on Delivery (COD)">
@@ -249,7 +249,7 @@
                                 @foreach($cartItems as $item)
                                     <tr>
                                         <td class="border px-4 py-2">
-                                            <img src="{{ Storage::disk('public')->url($item->attributes->image) }}" alt="{{ $item->name }}" class="w-20 h-20 object-cover">
+                                            {{-- <img src="{{ Storage::disk('public')->url($item->attributes->image) }}" alt="{{ $item->name }}" class="w-20 h-20 object-cover"> --}}
                                             <div>{{ $item->name }}</div>
                                         </td>
                                         <td class="border px-4 py-2">{{ number_format($item->price, 2) }}</td>
@@ -269,15 +269,15 @@
                         <strong>Grand Total</strong>
                         <p class="text-xl">Rs <span id="grand-total">{{ number_format(Cart::getTotal(), 2) }}</span></p>
                     </div>
-                    <form action="{{ route('order.place') }}" method="POST">
+                    <form action="{{ route('orders') }}" method="POST">
                         @csrf
                         <!-- Include other necessary fields here -->
-                        <input type="text" name="first_name" placeholder="First Name" required>
+                        {{-- <input type="text" name="first_name" placeholder="First Name" required>
                         <input type="text" name="last_name" placeholder="Last Name" required>
                         <input type="text" name="address" placeholder="Address" required>
                         <input type="text" name="city" placeholder="City" required>
                         <input type="text" name="postal_code" placeholder="Postal Code" required>
-                        <input type="text" name="phone" placeholder="Phone" required>
+                        <input type="text" name="phone" placeholder="Phone" required> --}}
                         
                         <button type="submit" id="cod-button" class="btn btn-secondary">Cash on Delivery</button>
                     </form>
@@ -379,5 +379,26 @@
             .catch(error => console.error('Error:', error));
         });
     </script>
+    <script>
+        // JavaScript to handle scroll event and update progress bar 
+       window.onscroll = function() {
+           var progressBarContainer = document.getElementById("progressBarContainer");
+           var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+           var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+           var scrolled = (winScroll / height) * 100;
+       
+           // Update progress bar width
+           document.getElementById("progressBar").style.width = scrolled + "%";
+       
+           // Change position from relative to fixed after scrolling 100 pixels
+           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+               progressBarContainer.classList.remove('relative');
+               progressBarContainer.classList.add('fixed');
+           } else {
+               progressBarContainer.classList.remove('fixed');
+               progressBarContainer.classList.add('relative');
+           }
+       };
+       </script>
 </body>
 </html>

@@ -70,10 +70,10 @@
                                     {{ $product->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover">
+                                    <img src="{{ asset('storage/'. $product->image) }}" alt="{{ $product->name }}" class="w-auto mt-8 ml-25 object-cover" style="height: 100px;  border-color: black; border-width: 1px; border-style: solid;">
                                 </td>
                                 <td class="px-6 py-4">
-                                    ${{ number_format($product->price, 2) }}
+                                    LKR {{ number_format($product->price, 2) }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $product->stocks }}

@@ -66,10 +66,15 @@
                                 </td>
                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                     <div class="flex gap-3">
+
                                         <a href="{{ route('order.details', $order->id) }}"
                                             class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-600 hover:text-emerald-50">Order Details</a>
                                         <a href="{{ route('order.track', $order->id) }}"
                                             class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-500 hover:text-emerald-50">Track Order</a>
+                                        <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-500 hover:text-rose-100">Delete</button>    
                                     </div>
                                 </td>
                             </tr>

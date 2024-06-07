@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
-
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -17,10 +16,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $totalCustomers = User::where('role', '2')->count();
+        $totalMerchandizers = User::where('role', '3')->count();
         $totalProducts = Product::count();
-        $totalCustomers = User::where('role', 'customer')->count();
-        $totalMerchandizers = User::where('role', 'merchandizer')->count();
+        $totalOrders = Order::count();
+        $totalSales = Order::sum('total');
 
-        return view('dashboard', compact('totalProducts', 'totalCustomers', 'totalMerchandizers'));
+        $orders = Order::select('id', 'total')->get();
+        $orderNumbers = $orders->pluck('id')->toArray();
+        $orderTotals = $orders->pluck('total')->toArray();
+
+        return view('dashboard', compact('totalCustomers', 'totalMerchandizers', 'totalProducts', 'totalOrders', 'totalSales', 'orderNumbers', 'orderTotals'));
     }
 }

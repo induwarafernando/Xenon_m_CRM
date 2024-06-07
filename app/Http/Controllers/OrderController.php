@@ -39,6 +39,33 @@ class OrderController extends Controller
         return redirect()->route('orders.index')->with('success', 'Order status updated successfully!');
     }
 
+     // Method to store an order
+     public function store(Request $request)
+     {
+         // Validate the request data
+         $validatedData = $request->validate([
+             // Define validation rules for your order data
+                'email' => 'required|email',
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'address' => 'required|string',
+                'city' => 'required|string',
+                'postal_code' => 'required|string',
+                'phone' => 'required|string',
+                'total' => 'required|numeric',
+                'status' => 'required|string',
+
+         ]);
+ 
+         // Create a new order using the validated data
+         $order = Order::create($validatedData);
+ 
+         // Optionally, you can perform additional actions here
+ 
+         // Return a response indicating success
+         return response()->json(['message' => 'Order stored successfully', 'order' => $order], 201);
+     }
+
 
     public function show($id)
     {
@@ -67,7 +94,7 @@ class OrderController extends Controller
 
         // Create the order
         $order = Order::create([
-            'user_id' => auth()->id(), // Assuming user is authenticated
+            'id' => auth()->id(), // Assuming user is authenticated
             'email' => auth()->user()->email, // Assuming user is authenticated and has an 'email' field
             'payment_method' => 'Cash on Delivery', // You can change this to 'PayPal', 'Stripe', etc. based on your payment method
             'first_name' => $validatedData['first_name'],
@@ -93,6 +120,13 @@ class OrderController extends Controller
         Cart::clear();
 
         // Redirect to the order listing page with a success message
-        return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
+        return redirect()->route('admin/orders/list')->with('success', 'Order placed successfully!');
+    }
+
+    //delete order
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return redirect()->route('admin.orders.list')->with('success', 'Order deleted successfully!');
     }
 }

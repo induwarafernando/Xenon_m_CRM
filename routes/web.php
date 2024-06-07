@@ -115,12 +115,18 @@ Route::get('/cart/items', function() {
     return response()->json(['items' => $items, 'total' => $total]);
 })->name('cart.items');
 
-Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+// Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders');
 
 
 Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.details');
 Route::get('/orders/{id}/track', [OrderController::class, 'track'])->name('order.track');
+Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
+
+//customer order-listing route
+Route::get('/order-listing', [OrderController::class, 'list'])->name('order-listing');
 
 Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
 Route::post('/admin/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
