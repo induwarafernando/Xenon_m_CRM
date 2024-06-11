@@ -27,6 +27,15 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+// Authenticated Routes
+Route::get('/home', [HomeController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/redirect', function () {
+    return redirect()->route('role.redirect');
+})->name('login.redirect');
+
+// Dashboard Route
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,15 +51,6 @@ Route::post('/merchandizer-register', [RegisterController::class, 'create'])->na
 // Login Route to ensure it goes through AuthenticatedSessionController
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
-// Authenticated Routes
-Route::get('/home', [HomeController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/redirect', function () {
-    return redirect()->route('role.redirect');
-})->name('login.redirect');
-
-// Dashboard Route
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Product Category Routes
 Route::resource('product_category', ProductCategoryController::class);
@@ -115,7 +115,7 @@ Route::get('/cart/items', function() {
     return response()->json(['items' => $items, 'total' => $total]);
 })->name('cart.items');
 
-// Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders');
 
 

@@ -357,6 +357,7 @@
                 total_amount: calculateGrandTotal()
             };
 
+            console.log('Form Data:', formData);
             // Send the form data to the server
             fetch('{{ route('checkout.store') }}', {
                 method: 'POST',

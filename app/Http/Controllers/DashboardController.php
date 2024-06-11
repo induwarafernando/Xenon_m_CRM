@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $totalOrders = Order::count();
         $totalSales = Order::sum('total');
 
+    
         $orders = Order::select('id', 'total')->get();
         $orderNumbers = $orders->pluck('id')->toArray();
         $orderTotals = $orders->pluck('total')->toArray();

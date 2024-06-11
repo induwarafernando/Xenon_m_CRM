@@ -8,13 +8,16 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Product;
 
 
+
 class OrderController extends Controller
 {
    
     public function index()
-    {
+    {   
+        
         $orders = Order::with('products')->get(); // Eager load products
         return view('admin.orders.list', compact('orders'));
+        
     }
 
       // Create the list method if it doesn't exist

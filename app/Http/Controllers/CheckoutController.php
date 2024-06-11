@@ -11,6 +11,7 @@ class CheckoutController extends Controller
 {
     public function index()
     {
+        
         // Retrieve cart items
         $cartItems = Cart::getContent();
 
@@ -52,8 +53,10 @@ class CheckoutController extends Controller
 
     public function placeOrder(Request $request)
 {
+    dd($request->all());
     // Validate and store the order details
     $validatedData = $request->validate([
+        'user_id' => 'required|exists:users,id',
         'email' => 'required|email',
         'first_name' => 'required|string',
         'last_name' => 'required|string',
@@ -68,6 +71,22 @@ class CheckoutController extends Controller
 
     // Create the order
     $order = Order::create($validatedData);
+    // store order in the database
+    $orders = Order::create([
+        'user_id' => auth()->id(),
+        'email' => $request->email,
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'address' => $request->address,
+        'apartment' => $request->apartment,
+        'city' => $request->city,
+        'postal_code' => $request->postal_code,
+        'phone' => $request->phone,
+        'payment_method' => $request->payment_method,
+        'total' => $request->total,
+        'status' => 'Pending',
+    ]);
+    
 
     // Clear the cart
     Cart::clear();
@@ -75,5 +94,9 @@ class CheckoutController extends Controller
     // Redirect to home with success message
     return redirect()->route('home')->with('success', 'Order placed successfully! Navigate to order listing to track your order.');
 }
+
+//cash on delivery button function
+
+
 
 }
