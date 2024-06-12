@@ -49,7 +49,7 @@
                                     {{ $order->first_name }} {{ $order->last_name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    ${{ number_format($order->total, 2) }}
+                                    LKR {{ number_format($order->total, 2) }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{-- <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST"> --}}

@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->string('meta_description');
             $table->string('meta_keywords');
             $table->integer('order_by')->default(0);
-            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

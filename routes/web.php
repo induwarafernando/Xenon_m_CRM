@@ -90,7 +90,7 @@ Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
 //checkout
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 
@@ -103,7 +103,7 @@ Route::get('/paypal/payment/cancel', [PayPalController::class, 'cancelPayment'])
 Route::get('/cart/items', function() {
     $cartItems = Cart::getContent();
     $total = Cart::getTotal(); // Adjust according to your needs (use total, subtotal, etc.)
-    
+
     $items = $cartItems->map(function ($item) {
         return [
             'name' => $item->name,

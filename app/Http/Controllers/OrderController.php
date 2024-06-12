@@ -11,13 +11,13 @@ use App\Models\Product;
 
 class OrderController extends Controller
 {
-   
+
     public function index()
-    {   
-        
+    {
+
         $orders = Order::with('products')->get(); // Eager load products
         return view('admin.orders.list', compact('orders'));
-        
+
     }
 
       // Create the list method if it doesn't exist
@@ -45,6 +45,7 @@ class OrderController extends Controller
      // Method to store an order
      public function store(Request $request)
      {
+        dd($request->all());
          // Validate the request data
          $validatedData = $request->validate([
              // Define validation rules for your order data
@@ -59,12 +60,12 @@ class OrderController extends Controller
                 'status' => 'required|string',
 
          ]);
- 
+
          // Create a new order using the validated data
          $order = Order::create($validatedData);
- 
+
          // Optionally, you can perform additional actions here
- 
+
          // Return a response indicating success
          return response()->json(['message' => 'Order stored successfully', 'order' => $order], 201);
      }
@@ -94,6 +95,10 @@ class OrderController extends Controller
             'postal_code' => 'required|string',
             'phone' => 'required|string',
         ]);
+
+        // create a cash on delivery order
+
+        
 
         // Create the order
         $order = Order::create([

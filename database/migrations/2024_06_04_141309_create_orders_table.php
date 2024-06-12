@@ -13,6 +13,8 @@ return new class extends Migration
 {
     Schema::create('orders', function (Blueprint $table) {
         $table->id();
+        // Add user_id column with foreign key constraint
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->string('email');
         $table->string('first_name');
         $table->string('last_name');
@@ -28,7 +30,7 @@ return new class extends Migration
         $table->string('status')->default('Awaiting Delivery');
     });
 }
-    
+
 
     /**
      * Reverse the migrations.
